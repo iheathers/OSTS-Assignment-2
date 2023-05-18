@@ -60,4 +60,4 @@ filtered_data_with_removed_columns=$(gawk -f remove_columns.awk <<<$non_empty_li
 filtered_data_with_removed_empty_cells=$(gawk -f drop_empty_cell_row.awk <<<$filtered_data_with_removed_columns)
 
 #FILTER DATA WHERE THE NUMBERS OF AFFECTED INDIVIDUALS ARE LESS THAN 0 (NEGATIVE) OR OTHER INVALID DATA
-gawk -f check_positive_numbers.awk <<<$filtered_data_with_removed_empty_cells
+gawk -v COL_IDX=3 -f check_positive_numbers.awk <<<$filtered_data_with_removed_empty_cells
