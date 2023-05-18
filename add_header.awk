@@ -1,4 +1,4 @@
-# Example awk script to add a row at the top
+#!/usr/bin/env awk -f
 BEGIN {
     FS = "\t"
     OFS = "\t"
