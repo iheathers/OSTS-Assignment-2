@@ -63,4 +63,6 @@ filtered_data_with_removed_empty_cells=$(gawk -f drop_empty_cell_row.awk <<<$fil
 filtered_data_with_positive_individuals=$(gawk -v COL_IDX=3 -f check_positive_numbers.awk <<<$filtered_data_with_removed_empty_cells)
 
 # EXTRACT START DATES
-gawk -v DATE_COL_IDX=4 -f extract_start_date.awk <<<$filtered_data_with_positive_individuals
+start_dates=$(gawk -v DATE_COL_IDX=4 -f extract_start_date.awk <<<$filtered_data_with_positive_individuals)
+
+gawk -v BREACH_COL_IDX=5 -f extract_primary_breach.awk <<<$filtered_data_with_positive_individuals

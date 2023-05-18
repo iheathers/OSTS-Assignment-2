@@ -89,7 +89,7 @@ Omaha Construction Industry Health and Welfare Plan	NE	800	1/11/09	Theft	Laptop
 City of Charlotte, NC (Health Plan)	NC	5220	2/3/10	Loss	Other
 VA North Texas Health Care System	TX	4083	5/4/10	Improper Disposal	Paper
 Rainbow Hospice and Palliative Care	IL	1000	4/12/10	Theft	Laptop	An employee's laptop was stolen out of her bag while she was making an admission visit in a patient's home.  The evidence showed that although the covered entity had a policy of encrypting and password-protecting its computers, this particular computer did not require a password most of the time.  The invoices contained the protected health information (PHI) of approximately 1,000 individuals.  The PHI stored on the laptop included names, addresses, dates of birth, phone numbers, Social Security numbers, Medicare numbers, electronic health records and commercial insurance information.  Following the breach, the covered entity notified its clients of the incident, placed notice on its website and in The Daily Herald, sanctioned the employee for changing the security settings on the laptop in question, and established stringent computer security guidelines, and retrained its staff in the new requirements, with the intention of preventing a similar event from occurring again.
-Cincinnati Childrens Hospital Medical Center 	OH	60998	3/27/2010	Theft	Laptop
+Cincinnati Childrens Hospital Medical Center 	OH	60998	3/27/2010	Theft	Laptop
 Occupational Health Partners	KS	1105	5/12/10	Theft	Laptop
 AvMed, Inc.	FL	1220000	12/10/09	Theft	Laptop	Two laptop computers with questionable encryption (each containing the electronic protected health information (ePHI) of 350,000 individuals) were stolen from the covered entity's (CE) premises.  The types of ePHI involved included demographic and clinical information, diagnoses/conditions, medications, lab results, and other treatment data.  After discovering the breach, the CE reported the theft to law enforcement and worked with the local police to recover the laptops.  As a result of OCR's investigation, the CE developed and implemented new policies and procedures to comply with the Security Rule.  The CE also provided breach notification to all affected individuals, HHS, and the media and placed an accounting of disclosures in the medical records of all affected individuals.
 UnitedHealth Group health plan single affiliated covered entity	MN	16291	1/26/2010	Other	Paper	Paper correspondence to certain members in UnitedHealth's prescription drug plans were in advertently sent to the incorrect temporary address due to a database administration error.  Approximately 16,291 individuals were affected by the breach. UnitedHealth member's name, plan number and in some instances, date of birth and/or limited medical information. United Health reported that it stopped using PDI's proprietary database for address updates and made outbound verifications calls to members to get accurate temporary addresses.   United Health reported that it revised its address update process.   
@@ -1037,29 +1037,24 @@ Bio-Reference Laboratories, Inc.	NJ	1749	2/2/14	Other	Network Server
 American Health Inc. 	PR	11531	9/20/2013	Unauthorized Access/Disclosure	Paper
 Central City Concern	OR	17914	3/23/2010	Unauthorized Access/Disclosure	Other
 Blue Cross Blue Shield of Michigan/Blue Care Network	MI	502	2/15/2014	Unauthorized Access/Disclosure, Hacking/IT Incident	E-mail
-Elliot Health System	NH	1208	3/26/98	Theft	Desktop Computer
+Elliot Health System	NH	1208	3/26/2014	Theft	Desktop Computer
 Humana Inc case #15381	KY	2962	4/2/14	Theft	Other Portable Electronic Device
-Jamaica Hospital Medical Center	NY	26162	8/1/90	Unauthorized Access/Disclosure	Desktop Computer
+Jamaica Hospital Medical Center	NY	26162	8/1/11	Unauthorized Access/Disclosure	Desktop Computer
 Bay Park Hospital	OH	594	4/1/13	Unauthorized Access/Disclosure	Network Server, Electronic Medical Record
 Triple-S Salud 	PR	56853	9/20/2013	Unauthorized Access/Disclosure	Paper
 Aetna Life Insurance Company	CT	3814	4/2/14	Theft	Laptop
 Salina Health Education Foundation dba Salina Family Healthcare Center	KS	9640	4/8/14	Unauthorized Access/Disclosure	E-mail
 Highmark Inc.	PA	2589	4/19/2014	Loss, Unauthorized Access/Disclosure	Paper
-Mark A. Gillispie	CA	5845	11/20/99	Theft	Desktop Computer
+Mark A. Gillispie	CA	5845	11/20/2013	Theft	Desktop Computer
 Penn State Milton S Hershey Medical Center	PA	1801	9/13/2013	Other	E-mail, Other Portable Electronic Device
 Walgreen Co.	IL	540	3/3/14	Theft	Desktop Computer, Paper
-St. Francis Hospital	GA	S1175	5/30/99	Other	E-mail
-Puerto Rico Health Insurance 	PR	-1	9/20/2013	Theft	Other
-Hospitalists of Brandon, LLC	FL	0	2/11/14	Hacking/IT Incident	Other
-Santa Rosa Memorial Hospital 	CA	1	6/2/99	Theft, Loss	Other Portable Electronic Device
-Group Health Plan of Hurley Medical Center	MI	2289	5/13/99	Unauthorized Access/Disclosure	E-mail
+St. Francis Hospital	GA	1175	5/30/2014	Other	E-mail
+Puerto Rico Health Insurance 	PR	28413	9/20/2013	Theft	Other
 
 
-  	        	5471	5/27/2014		Desktop Computer
-
-Abrham Tekola, M.D.,INC	CA		5/27/90	Theft	Desktop Computer
-
-
+Hospitalists of Brandon, LLC	FL	1831	2/11/14	Hacking/IT Incident	Other
+Santa Rosa Memorial Hospital 	CA	S33702	6/2/14	Theft, Loss	Other Portable Electronic Device
+Group Health Plan of Hurley Medical Center	MI		5/13/2014	Unauthorized Access/Disclosure	E-mail
 
 
-
+Abrham Tekola, M.D.,INC	CA	5471	5/27/2014	Theft	Desktop Computer

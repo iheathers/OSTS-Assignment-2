@@ -19,6 +19,9 @@ BEGIN { FS = "\t" }
     }
     else { yearPrefix = "" }
 
+    # MAYBE ADD ADDITIONAL CHECK TO SEE
+    # IF LEGTH OF YEAR IS LESS THAN OR EQUAL TO 4,
+    # MONTH IS LESS THAN 12 AND DAY IS LESS THAN = 32
     # Format the start date as Month/Day/YYYY
     startDate = sprintf(\
         "%d/%d/%s%s", dateParts[1], dateParts[2], yearPrefix, dateParts[3]\
