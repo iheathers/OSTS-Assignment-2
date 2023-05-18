@@ -45,7 +45,7 @@ non_empty_lines=$(gawk 'NF' "$tsv_file")
 # echo $result
 gawk -v INVALID_INPUT_EXIT_CODE=$INVALID_INPUT_EXIT_CODE -v SUCCESS_EXIT_CODE=$SUCCESS_EXIT_CODE -f check_single_line.awk <<<$non_empty_lines || {
     exit_status=$?
-    echo "Invalid File. $tsv_file has just headers in it."
+    echo "ERROR: Invalid File. $tsv_file has just headers in it."
     exit $exit_status
 }
 
@@ -61,6 +61,8 @@ filtered_data_with_positive_individuals=$(gawk -v COL_IDX=3 -f check_positive_nu
 # EXTRACT START DATES
 filtered_data_with_extracted_dates=$(gawk -v DATE_COL_IDX=4 -f extract_start_date.awk <<<$filtered_data_with_positive_individuals)
 
+# EXTRACT PRIMARY BREACHES
 processed_data=$(gawk -v BREACH_COL_IDX=5 -f extract_primary_breach.awk <<<$filtered_data_with_extracted_dates)
 
+# ADD HEADER AND PRINT OUTPUT TO STANDARD OUTPUT
 gawk -f add_header.awk <<<$processed_data

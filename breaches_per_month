@@ -1,0 +1,50 @@
+# AUTHOR: PRITAM SUWAL SHRESTHA (23771397)
+
+# SCRIPT NAME: breaches_per_month
+# DESCRIPTION: ADD DESCRIPTION LATER ON
+
+#!/usr/bin/env bash
+
+# Colored output for debugging: bash -xv cyber_breaches <tsv_file> <second_argument>
+PS4=$'\e[1;32m+${BASH_SOURCE}:${LINENO}: \e[0m'
+
+COMMAND=$0
+
+USAGE_MSG="USAGE: $COMMAND <tsv_file>"
+
+# Exit Codes
+SUCCESS_EXIT_CODE=0
+INVALID_ARGUMENTS_EXIT_CODE=1
+FILE_NOT_FOUND_EXIT_CODE=2
+DATA_NOT_FOUND_EXIT_CODE=3
+INVALID_FILE_EXIT_CODE=4
+INVALID_INPUT_EXIT_CODE=5
+
+# Check if the number of arguments is 1. If not, echo the Usage of the command
+if [[ $# -ne 1 ]]; then
+    echo $USAGE_MSG >/dev/stderr
+
+    exit $INVALID_ARGUMENTS_EXIT_CODE
+fi
+
+tsv_file=$1 # First argument is a tab seperated value file
+
+# Checks if the file exist and if it exist whether it is empty or not
+if [[ ! -s $tsv_file ]] || [[ ! -f $tsv_file ]]; then
+    echo "ERROR: The file $tsv_file does not exist or is empty" >/dev/stderr
+
+    exit $FILE_NOT_FOUND_EXIT_CODE
+fi
+
+# Check whether the file is single line or not
+# awk 'NF' "$tsv_file" -> Removes all the empty lines
+# And then check whether the file has single line only which is assumed to be header.
+
+non_empty_lines=$(gawk 'NF' "$tsv_file")
+
+# echo $result
+gawk -v INVALID_INPUT_EXIT_CODE=$INVALID_INPUT_EXIT_CODE -v SUCCESS_EXIT_CODE=$SUCCESS_EXIT_CODE -f check_single_line.awk <<<$non_empty_lines || {
+    exit_status=$?
+    echo "ERROR: Invalid File. $tsv_file has just headers in it."
+    exit $exit_status
+}
