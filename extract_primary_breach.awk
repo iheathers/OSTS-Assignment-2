@@ -1,7 +1,10 @@
 #!/usr/bin/env awk -f
 
 # Set the field separator (FS) to the desired delimiter
-BEGIN { FS = "\t" }
+BEGIN {
+    FS = "\t"
+    OFS = "\t"
+}
 
 # Process the "Type of Breach" column
 {
