@@ -36,20 +36,18 @@ if [[ ! -s $tsv_file ]] || [[ ! -f $tsv_file ]]; then
     exit $FILE_NOT_FOUND_EXIT_CODE
 fi
 
-# Check whether the file is single line or not
-# awk 'NF' "$tsv_file" -> Removes all the empty lines
-# And then check whether the file has single line only which is assumed to be header.
-
+# REMOVE EMPTY LINES
 non_empty_lines=$(gawk 'NF' "$tsv_file")
 
-# echo $result
+# CHECK IF FILE HAS SINGLE LINES OR MULTIPLE LINES
+# ASSUMPTIONS: IF SINGLE LINE IS PRESENT, THAT IS ASSUMED TO BE HEADER WHICH WE DON'T NEED TO PREPROCESS
 gawk -v INVALID_INPUT_EXIT_CODE=$INVALID_INPUT_EXIT_CODE -v SUCCESS_EXIT_CODE=$SUCCESS_EXIT_CODE -f check_single_line.awk <<<$non_empty_lines || {
     exit_status=$?
     echo "ERROR: Invalid File. $tsv_file has just headers in it."
     exit $exit_status
 }
 
-# Remove 6th and 7th column if they exist
+# REMOVE COLUMNS WHOSE INDEX IS GREATER THAN 5
 filtered_data_with_removed_columns=$(gawk -f remove_columns.awk <<<$non_empty_lines)
 
 # REMOVED DATA WITH EMPTY CELLS
@@ -58,13 +56,11 @@ filtered_data_with_removed_empty_cells=$(gawk -f drop_empty_cell_row.awk <<<$fil
 # FILTER DATA WHERE THE NUMBERS OF AFFECTED INDIVIDUALS ARE LESS THAN 0 (NEGATIVE) OR OTHER INVALID DATA
 filtered_data_with_positive_individuals=$(gawk -v COL_IDX=3 -f check_positive_numbers.awk <<<$filtered_data_with_removed_empty_cells)
 
-# EXTRACT START DATES
+# EXTRACT START DATES AND ADD MONTH IN MONTH COLUMN AND YEAR IN YEAR COLUMN
 filtered_data_with_extracted_dates=$(gawk -v DATE_COL_IDX=4 -f extract_start_date.awk <<<$filtered_data_with_positive_individuals)
 
-# EXTRACT PRIMARY BREACHES
+# REPLACE BREACHES BY PRIMARY BREACHES
 processed_data=$(gawk -v BREACH_COL_IDX=5 -f extract_primary_breach.awk <<<$filtered_data_with_extracted_dates)
 
 # ADD HEADER AND PRINT OUTPUT TO STANDARD OUTPUT
 gawk -f add_header.awk <<<$processed_data
-
-#  MAY BE CHECK THE STATE IS TWO CHARACTER OR NOT

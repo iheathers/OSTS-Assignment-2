@@ -36,25 +36,27 @@ if [[ ! -s $tsv_file ]] || [[ ! -f $tsv_file ]]; then
     exit $FILE_NOT_FOUND_EXIT_CODE
 fi
 
-# Check whether the file is single line or not
-# awk 'NF' "$tsv_file" -> Removes all the empty lines
-# And then check whether the file has single line only which is assumed to be header.
-
+# REMOVE EMPTY LINES
 non_empty_lines=$(gawk 'NF' "$tsv_file")
 
-# echo $result
+# CHECK WHETHER THE FILE HAS HEADER ONLY
 gawk -v INVALID_INPUT_EXIT_CODE=$INVALID_INPUT_EXIT_CODE -v SUCCESS_EXIT_CODE=$SUCCESS_EXIT_CODE -f check_single_line.awk <<<$non_empty_lines || {
     exit_status=$?
     echo "ERROR: Invalid File. $tsv_file has just headers in it."
     exit $exit_status
 }
 
+# CALCULATE TOTAL INCIDENTS ON EACH MONTH
 incidents_per_month=$(awk 'NR>1' <<<$non_empty_lines | cut -d$'\t' -f 6 | sort -n | uniq -c)
 
-median=$(gawk -f calculate_median.awk <<<$incidents_per_month)
+# ADD MISSING MONTH
+std_incidents_per_month=$(awk -f add_missing_month_counts.awk <<<$incidents_per_month)
 
-# pass median for mad calculation
-mad=$(gawk -v median=$median -f calculate_mean_abs_deviation.awk <<<$incidents_per_month)
+# # CALCULATE MEDIAN FROM THE DATA
+median=$(gawk -f calculate_median.awk <<<$std_incidents_per_month)
 
-# pass meidan and mad for table generation
-gawk -v median=$median -v mad=$mad -f generate_table.awk <<<$incidents_per_month
+# # CALCULATE MAD FROM THE DATA
+mad=$(gawk -v median=$median -f calculate_mean_abs_deviation.awk <<<$std_incidents_per_month)
+
+# # GENERATE TABLE
+gawk -v median=$median -v mad=$mad -f generate_table.awk <<<$std_incidents_per_month
