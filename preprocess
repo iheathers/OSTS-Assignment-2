@@ -66,3 +66,5 @@ processed_data=$(gawk -v BREACH_COL_IDX=5 -f extract_primary_breach.awk <<<$filt
 
 # ADD HEADER AND PRINT OUTPUT TO STANDARD OUTPUT
 gawk -f add_header.awk <<<$processed_data
+
+#  MAY BE CHECK THE STATE IS TWO CHARACTER OR NOT

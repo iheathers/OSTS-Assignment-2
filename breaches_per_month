@@ -48,3 +48,15 @@ gawk -v INVALID_INPUT_EXIT_CODE=$INVALID_INPUT_EXIT_CODE -v SUCCESS_EXIT_CODE=$S
     echo "ERROR: Invalid File. $tsv_file has just headers in it."
     exit $exit_status
 }
+
+incidents_per_month=$(awk 'NR>1' <<<$non_empty_lines | cut -d$'\t' -f 6 | sort -n | uniq -c)
+
+median=$(gawk -f calculate_median.awk <<<$incidents_per_month)
+# echo Median: $median
+
+# # pass median for mad calculation
+mad=$(gawk -v median=$median -f calculate_mean_abs_deviation.awk <<<$incidents_per_month)
+
+# echo MAD: $mad
+
+gawk -v median=$median -v mad=$mad -f generate_table.awk <<<$incidents_per_month
