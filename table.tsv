@@ -1,0 +1,17 @@
+Median:	93
+MAD:	11
+
+Month	Counts	Deviation Indicators
+-----	------	--------------------
+Jan	100	
+Feb	93	
+Mar	102	
+Apr	71	--
+May	93	
+Jun	77	--
+Jul	72	--
+Aug	75	--
+Sep	107	++
+Oct	95	
+Nov	93	
+Dec	77	--

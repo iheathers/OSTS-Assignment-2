@@ -1,10 +1,7 @@
 #!/usr/bin/env awk -f
 
 # Function to calculate absolute value
-function abs(x) {
-    if (x >= 0) { return x }
-    else { return -x }
-}
+function abs(x) { return x >= 0 ? x : -x }
 
 # Read the values into an array
 { values[NR] = $1 }
