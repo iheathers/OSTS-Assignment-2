@@ -47,7 +47,7 @@ gawk -v INVALID_INPUT_EXIT_CODE=$INVALID_INPUT_EXIT_CODE -v SUCCESS_EXIT_CODE=$S
 }
 
 # CALCULATE TOTAL INCIDENTS ON EACH MONTH
-incidents_per_month=$(awk 'NR>1' <<<$non_empty_lines | cut -d$'\t' -f 6 | sort -n | uniq -c)
+incidents_per_month=$(gawk 'NR>1' <<<$non_empty_lines | cut -d$'\t' -f 6 | sort -n | uniq -c)
 
 # ADD MISSING MONTH
 std_incidents_per_month=$(awk -f add_missing_month_counts.awk <<<$incidents_per_month)

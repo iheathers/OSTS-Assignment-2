@@ -47,11 +47,16 @@ gawk -v INVALID_INPUT_EXIT_CODE=$INVALID_INPUT_EXIT_CODE -v SUCCESS_EXIT_CODE=$S
     exit $exit_status
 }
 
+filtered_data_with_removed_header=$(gawk 'NR>1' <<<$non_empty_lines)
+
 # REMOVE COLUMNS WHOSE INDEX IS GREATER THAN 5
-filtered_data_with_removed_columns=$(gawk -f remove_columns.awk <<<$non_empty_lines)
+filtered_data_with_removed_columns=$(gawk -f remove_columns.awk <<<$filtered_data_with_removed_header)
 
 # REMOVED DATA WITH EMPTY CELLS
 filtered_data_with_removed_empty_cells=$(gawk -f drop_empty_cell_row.awk <<<$filtered_data_with_removed_columns)
+
+# FILTER DATA WITH INVALID US STATES
+filtered_data_with_std_us_state=$(gawk -v STATE_COL_IDX=2 -f check_us_state.awk <<<$filtered_data_with_removed_empty_cells)
 
 # FILTER DATA WHERE THE NUMBERS OF AFFECTED INDIVIDUALS ARE LESS THAN 0 (NEGATIVE) OR OTHER INVALID DATA
 filtered_data_with_positive_individuals=$(gawk -v COL_IDX=3 -f check_positive_numbers.awk <<<$filtered_data_with_removed_empty_cells)
