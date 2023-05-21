@@ -1,7 +1,31 @@
 # AUTHOR: PRITAM SUWAL SHRESTHA (23771397)
 
 # SCRIPT NAME: breaches_per_month
-# DESCRIPTION: ADD DESCRIPTION LATER ON
+
+# DESCRIPTION: Generate a table with months, incidents counts and deviation indicator.
+#              For each month, list the number of incidents and
+#              Indicator "++", if the count is 1 median-absolute-deviation above the median (or more);
+#              Indicator "--", if the count is 1 median-absolute-deviation below the median (or less).
+#              If the count is within 1 median-absolute-deviation of the median don't add anything
+
+# USAGE_MSG="USAGE: ./breaches_per_month <tsv_file>"
+
+# ----------------------------------------
+# | Month | Counts | Deviation Indicators |
+# |-------|--------|----------------------|
+# | Jan   | 100    |                      |
+# | Feb   | 93     |                      |
+# | Mar   | 102    |                      |
+# | Apr   | 71     | --                   |
+# | May   | 93     |                      |
+# | Jun   | 77     | --                   |
+# | Jul   | 72     | --                   |
+# | Aug   | 75     | --                   |
+# | Sep   | 107    | ++                   |
+# | Oct   | 95     |                      |
+# | Nov   | 93     |                      |
+# | Dec   | 77     | --                   |
+# ----------------------------------------
 
 #!/usr/bin/env bash
 
@@ -52,11 +76,11 @@ incidents_per_month=$(gawk 'NR>1' <<<$non_empty_lines | cut -d$'\t' -f 6 | sort 
 # ADD MISSING MONTH
 std_incidents_per_month=$(awk -f add_missing_month_counts.awk <<<$incidents_per_month)
 
-# # CALCULATE MEDIAN FROM THE DATA
+# CALCULATE MEDIAN FROM THE DATA
 median=$(gawk -f calculate_median.awk <<<$std_incidents_per_month)
 
-# # CALCULATE MAD FROM THE DATA
+# CALCULATE MAD FROM THE DATA
 mad=$(gawk -v median=$median -f calculate_mean_abs_deviation.awk <<<$std_incidents_per_month)
 
-# # GENERATE TABLE
+# GENERATE TABLE
 gawk -v median=$median -v mad=$mad -f generate_table.awk <<<$std_incidents_per_month

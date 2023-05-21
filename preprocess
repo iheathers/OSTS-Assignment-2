@@ -1,7 +1,14 @@
 # AUTHOR: PRITAM SUWAL SHRESTHA (23771397)
 
 # SCRIPT NAME: preprocess
-# DESCRIPTION: ADD DESCRIPTION LATER ON
+
+# DESCRIPTION: Preprocess the given tab separated file
+#              Add a month column (containing numbers 1..12) and a year field (containing 4-digit years) US date format: Month/Day/Year.
+#              Replace breach by primary breach
+#              Drop Location of Breached Information and the Summary columns
+#              Any rows with erroneous data should be dropped (Invalid State, Empty lines, row with empty cells, Invalid incidents)
+
+# USAGE_MSG="USAGE: ./preprocess <tsv_file>"
 
 #!/usr/bin/env bash
 
